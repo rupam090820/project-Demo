@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="container">
+
+    <header class="jumbotron">
+      <h1 align="center">|Riju SplFoodCenter|</h1>
+    </header>
+    <section class="form-group">
+      <input type="text" class="form-control" placeholder="Search foods......" #s (keyup)="search(s)">
+    </section>
+
+    <ng-container *ngIf="searchedFoodList!=0 then searchBlock else entireBlock"></ng-container>
+    <ng-template #searchBlock>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let f of searchedFoodList;let i=index" [class.x]="i%2==0" [class.y]="i%2!=0"
+          (click)="select(f)">
+          {{f.food}}
+
+          <span class="badge badge-pills badge-success float-right">&#8377; {{f.price}}</span>
+        </li>
+
+      </ul>
+    </ng-template>
+
+    <ng-template #entireBlock>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let f of foodList;let i=index" [class.x]="i%2==0" [class.y]="i%2!=0">
+          {{f.food}}
+          <span class="badge badge-pills badge-success float-right">&#8377; {{f.price}}</span>
+        </li>
+      </ul>
+    </ng-template>
+
+    <div *ngIf="detailsFood!=0">
+      <header class="jumbotron">
+        <h2>Food Details:{{detailsFood.food}}</h2>
+      </header>
+      <table class="table table-hover table-border">
+        <tr>
+          <th>Food Item :</th>
+          <td>{{detailsFood.food}}</td>
+        </tr>
+        <tr>
+          <th>Price</th>
+          <td>&#8377; {{detailsFood.price}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+</div>
